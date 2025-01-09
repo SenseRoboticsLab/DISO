@@ -14,25 +14,22 @@ We recommand using our docker compose file to build DISO and reproduce experimen
 
 Installation has been test on **Ubuntu 20.04** and **ROS Noetic**.
 
+### DISO Installation
 ```bash
 mkdir -p diso_ws/src
 cd diso_ws/src
-git clone git@github.com:SenseRoboticsLab/DISO_InternalShare.git
-cd ./DISO_InternalShare/docker
-docker build --network host -f ./diso.DockerFile -t diso ./
+git clone https://github.com/SenseRoboticsLab/DISO.git
+cd ./DISO/docker
 xhost +
-docker run --rm -it -v /tmp/.X11-unix:/tmp/.X11-unix -v ~/.ssh:/home/da/.ssh -e DISPLAY -e XAUTHORITY -e NVIDIA_DRIVER_CAPABILITIES=all --name diso --network host diso
-# winthin the container
-git clone git@github.com:SenseRoboticsLab/DISO_InternalShare.git
-cd ..
-catkin_make
-source ./devel/setup.bash
-roslaunch direct_sonar_odometry aracati2017.launch
+docker compose up
 ```
-You should have a rviz window jump out as follows after these steps:
+It may take a few minutes to build the docker. You should have a rviz window jump out when it's done as follows:
 ![](img/2.png)
 
-Then open a new terminal and follow the instruction to play data and visualize DISO:
+### Dataset Preparation
+Thanks the authors of [Aracati2017](https://github.com/matheusbg8/aracati2017) dataset for releasing their data. We updated the plot function to visualize our results on the aerial images.
+
+Open a new terminal and follow the instruction to play data and visualize DISO:
 ```bash
 #go to src of your catkin workspace
 cd diso_ws/src
