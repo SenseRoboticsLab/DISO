@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  diso_srv:
+    image: diso # Specify your image name and tag here
+    build:
+      context: ./
+      dockerfile: ./diso.DockerFile # Use the actual name of your Dockerfile
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.ssh:/home/da/.ssh
+    environment:
+      - DISPLAY=$DISPLAY
+      - XAUTHORITY=$XAUTHORITY
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    # ports:
+      # - "2222:22"
+    network_mode: host
+    stdin_open: true
+    tty: true
+    command: bash -i -c "source /home/da/diso_ws/devel/setup.bash && roslaunch direct_sonar_odometry aracati2017.launch"
+

@@ -1,0 +1,15 @@
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="map2odom"
+    args="0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 1.0000 map odom 100"/>
+
+    <include file="$(find robot_localization)/launch/ekf_rexrov.launch"/>
+    <node pkg="direct_sonar_odometry" type="sim_node" name="direct_sonar_odometry_node"
+          args="$(find direct_sonar_odometry)/config/config_sim.yaml" output="screen"/>
+
+    <node pkg="direct_sonar_odometry" type="repub_gt" name="repub_gt_node"/>
+
+    <node name="rviz_direct_sonar" pkg="rviz" type="rviz" args="-d $(find direct_sonar_odometry)/launch/sonar_odometry.rviz"/>
+
+    <node pkg="direct_sonar_odometry" type="bruce_save.py" name="bruce_save" output="screen"/>
+
+</launch>

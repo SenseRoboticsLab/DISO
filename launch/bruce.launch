@@ -1,0 +1,12 @@
+<launch>
+    <node pkg="tf" type="static_transform_publisher" name="world2odom"
+    args="0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 1.0000 odom orb_slam 100"/>
+
+    <node pkg="direct_sonar_odometry" type="direct_sonar_odometry_node2" name="direct_sonar_odometry_node"
+          args="$(find direct_sonar_odometry)/config/config_bruce.yaml" output="screen"/>
+
+    <node name="rviz_direct_sonar" pkg="rviz" type="rviz" args="-d $(find direct_sonar_odometry)/launch/sonar_odometry.rviz"/>
+
+    <node pkg="direct_sonar_odometry" type="bruce_save.py" name="bruce_save" output="screen"/>
+
+</launch>

@@ -1,0 +1,34 @@
+%YAML:1.0
+
+SonarTopic: "/bruce/slam/feature_extraction/feature_img"
+#OdomTopic: "/pose_gt"
+OdomTopic: "/bruce/slam/localization/odom"
+Range: 29.94
+GradientThreshold: 170.0 # 0~255
+PyramidLayer: 3
+FOV: 130.0
+GradientInlierThreshold: 50.0
+LossThreshold: 100
+#transformation matrix from sonar to body frame
+Tbs: !!opencv-matrix
+  rows: 4
+  cols: 4
+  dt: f
+  #  data: [ 0.996087228, -0.088375529,  0.000000000,  0.692565226,
+  #          0.088375529,  0.996087228, -0.000000000, -0.961352574,
+  #          0.000000000,  0.000000000,  1.000000000, -0.000000000,
+  #          0.000000000,  0.000000000,  0.000000000,  1.000000000 ]
+  data: [ 1.000000000,  0.000000000,  0.000000000,  0.0,
+          0.000000000,  0.000000000,  1.000000000,  0.0,
+          0.000000000,  -1.000000000,  0.000000000,  0.0,
+          0.000000000,  0.000000000,  0.000000000,  1.0 ]
+#  data: [ 1.000000000,  0.000000000,  0.000000000,  0.0, #bruce
+#          0.000000000,  0.000000000,  -1.000000000,  0.0,
+#          0.000000000,  1.000000000,  0.000000000,  0.0,
+#          0.000000000,  0.000000000,  0.000000000,  1.0 ]
+#SonarTopic: "/rexrov/blueview_p900/sonar_image"
+#OdomTopic: "/rexrov/pose_gt"
+#Range: 10.0
+#GradientThreshold: 300.0
+#PyramidLayer: 3
+#FOV: 90.0
